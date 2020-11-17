@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  ChatSocketGettingStarted
 //
-//  Created by Felipe Petersen on 31/03/20.
 //  Copyright © 2020 Felipe Petersen. All rights reserved.
 //
 

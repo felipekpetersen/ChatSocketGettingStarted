@@ -2,7 +2,6 @@
 //  ChatSingleton.swift
 //  ChatSocketGettingStarted
 //
-//  Created by Felipe Petersen on 31/03/20.
 //  Copyright © 2020 Felipe Petersen. All rights reserved.
 //
 
@@ -19,8 +18,9 @@ class SocketIOManager: NSObject {
         super.init()
     }
     
-    let manager = SocketManager(socketURL: URL(string: "http://192.168.15.14:3000")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://192.168.15.4:3000")!, config: [.log(true), .compress])
     lazy var socket:SocketIOClient = manager.defaultSocket
+    
     
     func establishConnection() {
         socket.connect()
@@ -45,11 +45,10 @@ class SocketIOManager: NSObject {
             messageDictionary["nickname"] = dataArray[0] as AnyObject
               messageDictionary["message"] = dataArray[1] as AnyObject
               messageDictionary["date"] = dataArray[2] as AnyObject
-              
             completionHandler(messageDictionary)
           }
       }
-     
+    
     func closeConnection() {
         socket.disconnect()
     }
