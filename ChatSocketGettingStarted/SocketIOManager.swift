@@ -18,7 +18,7 @@ class SocketIOManager: NSObject {
         super.init()
     }
     
-    let manager = SocketManager(socketURL: URL(string: "http://192.168.15.4:3000")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://191.193.191.240:9090")!, config: [.log(true), .compress])
     lazy var socket:SocketIOClient = manager.defaultSocket
     
     
@@ -52,4 +52,20 @@ class SocketIOManager: NSObject {
     func closeConnection() {
         socket.disconnect()
     }
+    
+    func sendFile(fileData: Data, type: String) {
+        socket.emit("fileMessage", myNick, fileData, type)
+    }
+    
+    func getFile(completionHandler: @escaping (_ messageInfo: [String: AnyObject]) -> Void) {
+        socket.on("newFile") { (dataArray, socketAck) -> Void in
+            var messageDictionary = [String: AnyObject]()
+            messageDictionary["nickname"] = dataArray[0] as AnyObject
+            messageDictionary["file"] = dataArray[1] as AnyObject
+            messageDictionary["type"] = dataArray[2] as AnyObject
+            messageDictionary["date"] = dataArray[3] as AnyObject
+            completionHandler(messageDictionary)
+        }
+    }
+        
 }

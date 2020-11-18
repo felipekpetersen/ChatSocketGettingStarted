@@ -58,9 +58,10 @@ class ViewController: UIViewController {
 //          }
 
     @IBAction func didTapEntere(_ sender: Any) {
+//        self.performSegue(withIdentifier: "segue", sender: self)
         if let nick = nameTextField.text, nick.isEmpty == false {
             SocketIOManager.sharedInstance.connectToServerWithNickname(nickname: nick) {
-                self.performSegue(withIdentifier: "chatSegue", sender: self)
+                self.performSegue(withIdentifier: "segue", sender: self)
             }
             
         }
